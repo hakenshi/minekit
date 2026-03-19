@@ -1,4 +1,4 @@
-# minescript-dx
+# Minekit
 
 Small, vendorable DX layer for Minescript.
 The goal is to have a no build library that abstracts the implementation of minescript, improving DX experience and making it easier to make scripts using minescript.
