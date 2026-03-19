@@ -1,4 +1,4 @@
-# Minekit
+# minescript-dx
 
 Small, vendorable DX layer for Minescript.
 The goal is to have a no build library that abstracts the implementation of minescript, improving DX experience and making it easier to make scripts using minescript.
@@ -7,7 +7,7 @@ To use it, all you need to do is clone this repository into your minescript fold
 ## Layout
 
 ```text
-mc/
+minekit/
   control/
   game/
   internal/
@@ -18,12 +18,12 @@ README.md
 LICENSE
 ```
 
-- `mc/` is the library.
-- `mc/control/` contains player/input controllers.
-- `mc/game/` contains world-facing helpers such as angles, blocks and commands.
-- `mc/internal/` contains private implementation details.
-- `mc/generated/` contains vendored catalog snapshots.
-- `commands/` contains ready-to-copy reference scripts built on top of `mc`.
+- `minekit/` is the library.
+- `minekit/control/` contains player/input controllers.
+- `minekit/game/` contains world-facing helpers such as angles, blocks and commands.
+- `minekit/internal/` contains private implementation details.
+- `minekit/generated/` contains vendored catalog snapshots.
+- `commands/` contains ready-to-copy reference scripts built on top of `minekit`.
 - `tools/` contains maintenance scripts such as catalog generation.
 
 ## Requirements
@@ -35,15 +35,15 @@ This library does not try to install or configure Minescript for you. It only wr
 
 ## Quick Start
 
-Copy or clone this repository into a Minescript scripts folder, then import from `mc`:
+Copy or clone this repository into a Minescript scripts folder, then import from `minekit`:
 
 ```python
-from mc.control.player import PlayerController
-from mc.control.inventory import InventoryController
-from mc.control.hotkeys import HotkeyController
-from mc.control.logs import LogController
-from mc.const import Action, Direction, HotbarSlot, KeyCode
-from mc.game.angles import PITCH_BLOCK_FACE
+from minekit.control.player import PlayerController
+from minekit.control.inventory import InventoryController
+from minekit.control.hotkeys import HotkeyController
+from minekit.control.logs import LogController
+from minekit.const import Action, Direction, HotbarSlot, KeyCode
+from minekit.game.angles import PITCH_BLOCK_FACE
 
 player = PlayerController()
 inventory = InventoryController()
@@ -69,7 +69,7 @@ with HotkeyController() as hotkeys:
 
 ## Modules
 
-### `mc.control.player`
+### `minekit.control.player`
 
 High-level player controller:
 
@@ -83,7 +83,7 @@ High-level player controller:
 - `spam_key(...)`
 - `center_on_block(...)`
 
-### `mc.control.inventory`
+### `minekit.control.inventory`
 
 Inventory and hotbar helpers:
 
@@ -103,7 +103,7 @@ Inventory and hotbar helpers:
 - `current_item_is_usable(...)`
 - `current_offhand_item_is_usable(...)`
 
-### `mc.control.mouse`
+### `minekit.control.mouse`
 
 Mouse helpers mapped to Minecraft actions:
 
@@ -115,7 +115,7 @@ Mouse helpers mapped to Minecraft actions:
 - `right_click(...)`
 - `middle_click(...)`
 
-### `mc.control.keyboard`
+### `minekit.control.keyboard`
 
 Keyboard helpers mapped to `press_key_bind(...)`:
 
@@ -124,7 +124,7 @@ Keyboard helpers mapped to `press_key_bind(...)`:
 - `tap(...)`
 - `spam(...)`
 
-### `mc.control.hotkeys`
+### `minekit.control.hotkeys`
 
 Keyboard event polling and toggle helpers:
 
@@ -135,7 +135,7 @@ Keyboard event polling and toggle helpers:
 - `wait_for_press(...)`
 - `toggle_on_press(...)`
 
-### `mc.control.logs`
+### `minekit.control.logs`
 
 Local-only chat logging helpers:
 
@@ -147,7 +147,7 @@ Local-only chat logging helpers:
 - `exception(...)`
 - `traceback(...)`
 
-### `mc.game.angles`
+### `minekit.game.angles`
 
 Yaw/pitch constants and helpers:
 
@@ -158,7 +158,7 @@ Yaw/pitch constants and helpers:
 - `clamp_pitch(...)`
 - `yaw_pitch_to_block(...)`
 
-### `mc.game.blocks`
+### `minekit.game.blocks`
 
 Helpers for block ids and block states:
 
@@ -167,7 +167,7 @@ Helpers for block ids and block states:
 - `with_block_states(...)`
 - `is_unloaded_block(...)`
 
-### `mc.const`
+### `minekit.const`
 
 Public constants facade:
 
@@ -182,7 +182,7 @@ Public constants facade:
 - `MouseButton`
 - `EntitySort`
 
-### `mc.game.commands`
+### `minekit.game.commands`
 
 Command builders on top of `minescript.execute(...)`:
 
@@ -199,11 +199,11 @@ The `commands/` folder contains small ready-to-copy scripts:
 - `commands/look_at_block.py`
 - `commands/spam_key.py`
 
-They import the local `mc` package directly and do not rely on anything beyond Python + Minescript.
+They import the local `minekit` package directly and do not rely on anything beyond Python + Minescript.
 
 ## Catalogs
 
-Block, item and entity catalogs are committed in `mc/generated/` as plain constant classes. They are regenerated from the local Minecraft installation and meant to be versioned in Git.
+Block, item and entity catalogs are committed in `minekit/generated/` as plain constant classes. They are regenerated from the local Minecraft installation and meant to be versioned in Git.
 
 To regenerate those catalogs from the current installation:
 
