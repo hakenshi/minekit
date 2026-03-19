@@ -21,7 +21,8 @@ def _slot_index(slot: int | HotbarSlot) -> int:
 
 _INT_PATTERNS = {
     "damage": (
-        re.compile(r'(?:"minecraft:damage"|minecraft:damage|Damage|damage)\s*[:=]\s*(\d+)'),
+        re.compile(
+            r'(?:"minecraft:damage"|minecraft:damage|Damage|damage)\s*[:=]\s*(\d+)'),
     ),
     "max_damage": (
         re.compile(
@@ -56,7 +57,8 @@ def _validate_expected_item(item, expected_item: str | None):
     expected_item = _normalized_id(expected_item)
     actual_item = _item_value(item, "name")
     if actual_item != expected_item:
-        raise ValueError(f"Expected held item {expected_item!r}, got {actual_item!r}.")
+        raise ValueError(
+            f"Expected held item {expected_item!r}, got {actual_item!r}.")
     return item
 
 
@@ -122,7 +124,8 @@ class InventoryController:
 
         result: dict[str, InventoryAggregate] = {}
         for name, stacks in aggregates.items():
-            slots = tuple(item.slot for item in stacks if item.slot is not None)
+            slots = tuple(
+                item.slot for item in stacks if item.slot is not None)
             result[name] = InventoryAggregate(
                 name=name,
                 total_count=sum(item.count or 0 for item in stacks),
@@ -199,7 +202,8 @@ class InventoryController:
 
         slot = _item_value(item, "slot", None)
         if slot is None:
-            raise ValueError(f"Inventory item {item_id!r} has no slot metadata.")
+            raise ValueError(
+                f"Inventory item {item_id!r} has no slot metadata.")
 
         slot = int(slot)
         if 0 <= slot <= 8:
